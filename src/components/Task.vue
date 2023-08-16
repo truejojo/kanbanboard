@@ -5,21 +5,15 @@ export default {
     task: {
       type: Object,
     },
-  },
-  methods: {
-    setBG(index) {
-      return index === 0
-        ? ["alert-danger"]
-        : index === 1
-        ? ["alert-primary"]
-        : ["alert-success"];
-    },
+    bgColor: {
+      type: String,
+    }
   },
 };
 </script>
 
 <template>
-  <div class="alert" :class="setBG(task.status)">
+  <div class="alert" :class="`alert-${bgColor}`">
     <h4>{{ task.content }}</h4>
   </div>
 </template>

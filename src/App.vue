@@ -11,19 +11,19 @@ export default {
         {
           status: 0,
           title: "Neue Aufgaben",
-          titleClasses: "bg-danger",
+          bgColor: "danger",
           newTask: true,
         },
         {
           status: 1,
           title: "In Bearbeitung",
-          titleClasses: "bg-primary",
+          bgColor: "primary",
           newTask: false,
         },
         {
           status: 2,
           title: "Erledigt",
-          titleClasses: "bg-success",
+          bgColor: "success",
           newTask: false,
         },
       ],
