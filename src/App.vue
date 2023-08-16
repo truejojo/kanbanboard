@@ -62,9 +62,13 @@ export default {
     };
   },
   methods: {
-    getTasks(status) {
-      return this.tasks.filter(task => task.status === status)
+    filteredTasks(status) {
+      return this.tasks.filter((task) => task.status === status);
     },
+    addTask(task) {
+      task.id = Math.random();
+      this.tasks.push(task);
+    }
   },
 };
 </script>
@@ -73,7 +77,7 @@ export default {
   <div class="container mt-5">
     <div class="row">
       <div class="col-4" v-for="card in cards" :key="card.status">
-        <StatusCard :card="card" :tasks="getTasks(card.status)" />
+        <StatusCard :card="card" :tasks="filteredTasks(card.status)" @new-task="addTask" />
       </div>
     </div>
   </div>

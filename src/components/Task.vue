@@ -5,15 +5,16 @@ export default {
     task: {
       type: Object,
     },
-    bgColor: {
+    alertColor: {
       type: String,
+      default: "secondary"
     }
   },
 };
 </script>
 
 <template>
-  <div class="alert" :class="`alert-${bgColor}`">
+  <div class="alert" :class="`alert-${alertColor}`">
     <h4>{{ task.content }}</h4>
   </div>
 </template>

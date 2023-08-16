@@ -17,6 +17,18 @@ export default {
       type: Array,
     },
   },
+  emits: {
+    "new-task": (task) => {
+      if ("status" in task === false) return false;
+      return true;
+    },
+  },
+  methods: {
+    newTask(task) {
+      task.status = this.card.status
+      this.$emit("new-task", task)
+    }
+  }
 };
 </script>
 
@@ -26,10 +38,10 @@ export default {
       <h4>{{ card.title }}</h4>
     </div>
     <div class="card-body">
-      <Task v-for="task in tasks" :task="task" :bgColor="card.bgColor" />
+      <Task v-for="task in tasks" :task="task" :alertColor="card.bgColor" />
     </div>
     <div v-if="card.newTask" class="card-footer">
-      <NewTask />
+      <NewTask @new-task="newTask" />
     </div>
   </div>
 </template>
