@@ -68,7 +68,8 @@ export default {
     addTask(task) {
       task.id = Math.random();
       this.tasks.push(task);
-    }
+      // this.task = [...this.task, task]
+    },
   },
 };
 </script>
@@ -77,11 +78,14 @@ export default {
   <div class="container mt-5">
     <div class="row">
       <div class="col-4" v-for="card in cards" :key="card.status">
-        <StatusCard :card="card" :tasks="filteredTasks(card.status)" @new-task="addTask" />
+        <StatusCard
+          :card="card"
+          :tasks="filteredTasks(card.status)"
+          @new-task="addTask"
+        />
       </div>
     </div>
   </div>
 </template>
 
-<style>
-</style>
+<style></style>

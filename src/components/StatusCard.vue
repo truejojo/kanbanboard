@@ -25,16 +25,19 @@ export default {
   },
   methods: {
     newTask(task) {
-      task.status = this.card.status
-      this.$emit("new-task", task)
-    }
-  }
+      task.status = this.card.status;
+      this.$emit("new-task", task);
+    },
+  },
 };
 </script>
 
 <template>
   <div class="card">
-    <div class="card-header text-center text-white" :class="`bg-${card.bgColor}`">
+    <div
+      class="card-header text-center text-white"
+      :class="`bg-${card.bgColor}`"
+    >
       <h4>{{ card.title }}</h4>
     </div>
     <div class="card-body">
