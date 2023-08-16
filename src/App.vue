@@ -9,18 +9,21 @@ export default {
     return {
       cards: [
         {
-          id: 1,
+          status: 0,
           title: "Neue Aufgaben",
+          titleClasses: "bg-danger",
           newTask: true,
         },
         {
-          id: 2,
+          status: 1,
           title: "In Bearbeitung",
+          titleClasses: "bg-primary",
           newTask: false,
         },
         {
-          id: 3,
+          status: 2,
           title: "Erledigt",
+          titleClasses: "bg-success",
           newTask: false,
         },
       ],
@@ -58,29 +61,9 @@ export default {
       ],
     };
   },
-  computed: {
-    newTasks() {
-      return this.tasks.filter((task) => task.status === 0);
-    },
-    inProgressTasks() {
-      return this.tasks.filter((task) => task.status === 1);
-    },
-    completedTasks() {
-      return this.tasks.filter((task) => task.status === 2);
-    },
-  },
   methods: {
-    getTasks(index) {
-      switch (index) {
-        case 0:
-          return this.newTasks;
-        case 1:
-          return this.inProgressTasks;
-        case 2:
-          return this.completedTasks;
-        default:
-          return [];
-      }
+    getTasks(status) {
+      return this.tasks.filter(task => task.status === status)
     },
   },
 };
@@ -89,8 +72,8 @@ export default {
 <template>
   <div class="container mt-5">
     <div class="row">
-      <div class="col-4" v-for="(card, index) in cards" :key="card.id">
-        <StatusCard :card="card" :tasks="getTasks(index)" />
+      <div class="col-4" v-for="card in cards" :key="card.status">
+        <StatusCard :card="card" :tasks="getTasks(card.status)" />
       </div>
     </div>
   </div>

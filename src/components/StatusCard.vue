@@ -17,21 +17,12 @@ export default {
       type: Array,
     },
   },
-  methods: {
-    setBG(index) {
-      return index === 1
-        ? ["bg-danger"]
-        : index === 2
-        ? ["bg-primary"]
-        : ["bg-success"];
-    },
-  },
 };
 </script>
 
 <template>
   <div class="card">
-    <div class="card-header text-center text-white" :class="setBG(card.id)">
+    <div class="card-header text-center text-white" :class="card.titleClasses">
       <h4>{{ card.title }}</h4>
     </div>
     <div class="card-body">
