@@ -1,9 +1,12 @@
 <script>
 export default {
   name: "NewTask",
+  // ist nicht reaktiv...
+  inject: ["maxNumberOfChars"],
   data() {
     return {
       content: "",
+      mode: "click"
     };
   },
   // emits: ["new-task"],
@@ -11,6 +14,11 @@ export default {
     "new-task": (task) => {
       if (task.content === "") return false;
       return true;
+    },
+  },
+  computed: {
+      numberOfCharsleft() {
+      return this.maxNumberOfChars - this.content.length;
     },
   },
   methods: {
@@ -31,10 +39,19 @@ export default {
       class="form-control"
       placeholder="Neue Aufgabe"
       v-model="content"
+      v-focus="{color: 'pink'}"
     />
+    <p class="mt-2 text-center text-muted"><i>Noch vorhandene Zeichen {{ numberOfCharsleft }}</i></p>
     <div class="d-grid my-2">
-      <button class="btn btn-danger" @click="submitTask">Eintragen</button>
+      <button class="btn btn-danger" @[mode]="submitTask">Eintragen</button>
     </div>
+    <!-- Nicht die Beste Lösung -->
+    <teleport to="#settings">
+      <select class="form-select" v-model="mode">
+        <option value="click">Click</option>
+        <option value="dblclick">Doppel-Click</option>
+      </select>
+    </teleport>
   </div>
 </template>
 

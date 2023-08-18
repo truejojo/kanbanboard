@@ -1,9 +1,18 @@
 <script>
 import StatusCard from "./components/StatusCard.vue";
+import logger from "./mixins/logger";
+
 export default {
   name: "App",
+  mixins: [logger],
   components: {
     StatusCard,
+  },
+  // ist nicht reaktiv... - nicht die Beste Lösung
+  provide() {
+    return {
+      maxNumberOfChars: 50,
+    };
   },
   data() {
     return {
@@ -51,15 +60,23 @@ export default {
         {
           id: 5,
           content: "Lorem ipsum sit amet.",
-          status: 0,
+          status: 2,
         },
         {
           id: 6,
           content: "Lorem, ipsum.",
           status: 2,
         },
+        {
+          id: 7,
+          content: "Kein Internet...",
+          status: 1,
+        },
       ],
     };
+  },
+  mounted() {
+    console.log("App-Component ist vollständig bereit.");
   },
   methods: {
     filteredTasks(status) {
@@ -69,6 +86,12 @@ export default {
       task.id = Math.random();
       this.tasks.push(task);
       // this.task = [...this.task, task]
+    },
+    updateStatus(statusDataObj) {
+      const task = this.tasks.find(
+        (task) => task.id === parseInt(statusDataObj.taskId)
+      );
+      task.status = statusDataObj.newStatus;
     },
   },
 };
@@ -82,6 +105,7 @@ export default {
           :card="card"
           :tasks="filteredTasks(card.status)"
           @new-task="addTask"
+          @status-updated="updateStatus"
         />
       </div>
     </div>
